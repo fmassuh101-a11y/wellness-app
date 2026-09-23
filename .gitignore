@@ -1,0 +1,12 @@
+# ── LLAVES ── nunca suben
+.env
+.env.local
+.env.*
+
+# ── NEXT / NODE ──
+node_modules/
+.next/
+out/
+.DS_Store
+*.tsbuildinfo
+.vercel
