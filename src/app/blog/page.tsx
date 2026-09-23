@@ -1,3 +1,11 @@
+// Esta pantalla no se genera al construir el sitio.
+//
+// Crea el cliente de Supabase al cargarse, y durante la construcción no hay
+// sesión ni navegador: el prerenderizado fallaba y tumbaba la publicación
+// entera. Al marcarla como dinámica se arma cuando alguien la visita, que es
+// cuando sí existe todo lo que necesita.
+export const dynamic = 'force-dynamic';
+
 export default function Blog() {
   const featuredArticle = {
     title: "The Science Behind Mindful Movement: How Exercise Enhances Mental Health",

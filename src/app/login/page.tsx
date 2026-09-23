@@ -1,5 +1,14 @@
 'use client';
 
+// Esta pantalla no se genera al construir el sitio.
+//
+// Crea el cliente de Supabase al cargarse, y durante la construcción no hay
+// sesión ni navegador: el prerenderizado fallaba y tumbaba la publicación
+// entera. Al marcarla como dinámica se arma cuando alguien la visita, que es
+// cuando sí existe todo lo que necesita.
+export const dynamic = 'force-dynamic';
+
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';

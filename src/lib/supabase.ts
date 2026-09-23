@@ -1,7 +1,21 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+/**
+ * Las credenciales llevan un valor de reserva a propósito.
+ *
+ * Antes usaban `!`, que le promete a TypeScript que la variable existe. Al
+ * construir el sitio, Next.js genera las páginas de antemano y en ese momento
+ * las variables de entorno del navegador todavía no están: createClient
+ * recibía `undefined`, reventaba, y tumbaba la publicación entera con un
+ * error de prerenderizado que no decía cuál era la causa.
+ *
+ * Con la reserva, la construcción termina siempre. En el navegador las
+ * variables reales sí están, así que la app funciona igual. Y si alguna
+ * faltara de verdad, el fallo aparece al usarla —con un mensaje claro— en vez
+ * de durante la compilación.
+ */
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://sin-configurar.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sin-configurar'
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {

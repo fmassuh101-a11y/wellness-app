@@ -1,3 +1,11 @@
+// Esta pantalla no se genera al construir el sitio.
+//
+// Crea el cliente de Supabase al cargarse, y durante la construcción no hay
+// sesión ni navegador: el prerenderizado fallaba y tumbaba la publicación
+// entera. Al marcarla como dinámica se arma cuando alguien la visita, que es
+// cuando sí existe todo lo que necesita.
+export const dynamic = 'force-dynamic';
+
 import HumanAnatomy from '@/components/anatomy/HumanAnatomy';
 import Chatbot from '@/components/chat/Chatbot';
 
